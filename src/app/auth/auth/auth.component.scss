@@ -1,0 +1,11 @@
+h3{
+  animation: nav-load 1s ease-in;
+}
+@keyframes nav-load{
+  0%{
+    transform: translateY(-100%);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}

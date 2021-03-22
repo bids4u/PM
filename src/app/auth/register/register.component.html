@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-lg-6 col-md-8 col-md-12 p-5 rounded"  style="background-color: white;">
+      <h3 class="text-center">Register</h3>
+      <form [formGroup]="mySignupForm" (ngSubmit)="onSubmit()" class='needs-validation' novalidate>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" name="email" formControlName="email" required>
+          <small class="invalid-feedback" *ngIf="!mySignupForm.get('email').valid &&mySignupForm.get('email').touched">
+            Enter a valid email
+          </small>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" name="username" formControlName="username" required>
+          <small class="invalid-feedback" *ngIf="!mySignupForm.get('username').valid &&mySignupForm.get('username').touched">
+            Enter a valid username
+          </small>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" formControlName="password" required>
+          <div *ngIf="!mySignupForm.get('password').valid">
+            <small class="invalid-feedback" *ngIf="!mySignupForm.get('password').errors.minlength &&mySignupForm.get('password').touched">
+              Minimum length of password not fulfilled
+            </small>
+          </div>
+        </div>
+        <button [disabled]="!mySignupForm.valid" type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <p>Already have an account?</p>
+      <a routerLink="/auth/login">Login</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+  <button mat-raised-button class="ml-5 mt-2" (click)="openDialog()">Add Password</button>
+  <div class="row justify-content-center align-items-center">
+    <input type="text" placeholder="Enter username to serach" [(ngModel)]="search" class="form-control mt-3">
+    <div  class="col-lg-10 col-md-12 col-sm-12" style="overflow: scroll;">
+      <table *ngIf="data" class="table table-hover table-bordered m-2 overflow-auto shadow-sm" style="background-color: white;  font-size: small;">
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">URL</th>
+          <th scope="col">Username</th>
+          <th scope="col">
+            Password
+            <ng-container *ngIf="display"><button mat-button  (click)="setDisplay()"><mat-icon>visibility</mat-icon></button>
+            </ng-container>
+            <ng-container *ngIf="!display"><button mat-button  (click)="setDisplay()"><mat-icon>visibility_off</mat-icon></button>
+            </ng-container>
+          </th>
+          <th scope="col">
+            Pin
+            <ng-container *ngIf="displayPin"><button mat-button  (click)="setDisplayPin()"><mat-icon>visibility</mat-icon></button>
+            </ng-container>
+            <ng-container *ngIf="!displayPin"><button mat-button  (click)="setDisplayPin()"><mat-icon>visibility_off</mat-icon></button>
+            </ng-container>
+          </th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+        <tr *ngFor="let item of data|filter:search;let i=index" class="p-2">
+          <th scope="row">{{i+1}}</th>
+          <td> <a [href]="item.url" target="_blanck" [matTooltip]="item.url">{{item.url|slice:0:30}}</a></td>
+          <td>{{item.username}}</td>
+          <td>
+            <ng-container *ngIf="display">{{item.password|password}}</ng-container>
+            <ng-container *ngIf="!display">{{item.password}} </ng-container>
+          </td>
+          <td>
+            <ng-container *ngIf="displayPin">{{item.pin|password}}</ng-container>
+            <ng-container *ngIf="!displayPin">{{item.pin}} </ng-container>
+            </td>
+          <td><button mat-button (click)="editDialog(i)">
+              <mat-icon>create</mat-icon>
+            </button></td>
+          <td><button mat-button (click)="onDelete(item._id)">
+              <mat-icon>delete</mat-icon>
+            </button></td>
+        </tr>
+      </table>
+      <p *ngIf="!data">Please add some password to show</p>
+    </div>
+
+  </div>
+
+</div>
